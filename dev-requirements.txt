@@ -1,0 +1,2 @@
+#include pytest and and test coverage
+pytest-cov == 4.1.0

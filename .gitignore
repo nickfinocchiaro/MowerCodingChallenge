@@ -1,0 +1,10 @@
+#ignoring python venv
+.venv/
+#ignoring vscode settings
+.vscode/
+#ignoring coverage reports
+*coverage
+#ignoring pycache
+__pycache__/
+.pytest_cache/
+

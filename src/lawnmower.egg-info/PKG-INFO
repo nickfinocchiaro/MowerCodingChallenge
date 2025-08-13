@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: lawnmower
+Version: 0.0.1
+Summary: Robotic lawnmower algorithm
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest-cov==4.1.0; extra == "dev"
+
+# LoftOrbital_MowerCodingChallenge
+Coding Challenge for loft orbital Sr. Software Position
