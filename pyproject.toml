@@ -1,7 +1,7 @@
 [project]
 name = "lawnmower"
 version = "0.0.1"
-description = "Robotic lawnmower algorithm"
+description = "Robotic Lawnmower Simulator"
 readme = "README.md"
 dynamic = ["dependencies", "optional-dependencies"]
 requires-python = ">=3.10"
