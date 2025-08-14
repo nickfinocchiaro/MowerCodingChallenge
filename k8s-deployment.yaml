@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lawnmower-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lawnmower-app
+  template:
+    metadata:
+      labels:
+        app: lawnmower-app
+    spec:
+      containers:
+        - name: lawnmower-app
+          image: nickfinn8/lawnmower-sim:latest
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lawnmower-service
+spec:
+  selector:
+    app: lawnmower-app
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP

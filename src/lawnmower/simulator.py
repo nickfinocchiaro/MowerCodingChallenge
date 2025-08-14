@@ -80,8 +80,13 @@ class LawnMowerSimulator:
         self._cut_grass(new_pos)
 
     def simulate(self, path: List[str]) -> Dict:
-        """Simulate the path, cutting grass and checking for crashes returning the result"""
+        """Simulate the path, cutting grass and checking for crashes returning the result
+        The simulator moves the mower one step at a time according to the path provided.
+        Checking each step for rocks and boundaries. if a crash occurs, it stops moving.
+        """
         for step in path:
+            if self.crashed:
+                break
             self._move(step)
 
         uncut_grass = sum(1 for cell in self.grid.values() if cell == UNCUT)

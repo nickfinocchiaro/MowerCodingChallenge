@@ -15,7 +15,7 @@ def test_basic_path():
     assert result['crashed'] is False
     assert result['crash_reason'] is None
 
-def test_crash_into_rock():
+def test_crash_into_rock_immediately():
     """Test path where mower crashes into a rock"""
     # 3x3 grid, rock at (0,1)
     sim = LawnMowerSimulator(width=3, height=3, rocks=[(0, 1)])
@@ -23,6 +23,17 @@ def test_crash_into_rock():
     result = sim.simulate(path)
     assert result['all_grass_cut'] is False
     assert result['uncut_grass_remaining'] > 0
+    assert result['crashed'] is True
+    assert result['crash_reason'] == "Crashed into rock"
+
+def test_crash_into_rock():
+    """Test path where mower crashes into a rock"""
+    # 3x3 grid, rock at (1,1)
+    sim = LawnMowerSimulator(width=3, height=3, rocks=[(1, 1)])
+    path = ["right", "right", "down", "left", "left", "down", "right", "right"]
+    result = sim.simulate(path)
+    assert result['all_grass_cut'] is False
+    assert result['uncut_grass_remaining'] == 4
     assert result['crashed'] is True
     assert result['crash_reason'] == "Crashed into rock"
 

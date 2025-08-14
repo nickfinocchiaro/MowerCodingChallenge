@@ -24,7 +24,7 @@ class Query:
     """GraphQL query type for the Robotic Lawnmower Simulator
     This class defines the fields available in the GraphQL schema:
     - simulate: Simulates the lawnmower's path and returns the result
-    - hello: Returns a welcome message"""
+    """
     @strawberry.field
     def simulate(
         self,
@@ -54,8 +54,3 @@ class Query:
         sim = LawnMowerSimulator(width=width, height=height, rocks=rocks_tuples)
         result = sim.simulate(path)
         return SimulationResult(**result)
-
-    @strawberry.field
-    def hello(self) -> str:
-        """Returns a welcome message"""
-        return "Welcome to the Robotic Lawnmower Simulator!"
