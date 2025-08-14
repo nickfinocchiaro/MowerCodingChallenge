@@ -1,6 +1,11 @@
+"""Unit tests for the Lawn Mower Simulator
+This module tests the functionality of the LawnMowerSimulator class,
+including movement, grass cutting, and handling of rocks and fences.
+It uses pytest for testing and checks the expected outcomes of various scenarios."""
 from lawnmower.simulator import LawnMowerSimulator
 
 def test_basic_path():
+    """Test basic path where mower cuts all grass without crashing"""
     # 3x3 grid, no rocks
     sim = LawnMowerSimulator(width=3, height=3, rocks=[])
     path = ["right", "right", "down", "down", "left", "left", "up", "right"]
@@ -11,6 +16,7 @@ def test_basic_path():
     assert result['crash_reason'] is None
 
 def test_crash_into_rock():
+    """Test path where mower crashes into a rock"""
     # 3x3 grid, rock at (0,1)
     sim = LawnMowerSimulator(width=3, height=3, rocks=[(0, 1)])
     path = ["right"]
@@ -21,6 +27,7 @@ def test_crash_into_rock():
     assert result['crash_reason'] == "Crashed into rock"
 
 def test_crash_into_fence():
+    """"Test path where mower crashes into a fence"""
     # 2x2 grid, try to go out of bounds
     sim = LawnMowerSimulator(width=2, height=2, rocks=[])
     path = ["up"]
@@ -31,6 +38,7 @@ def test_crash_into_fence():
     assert result['crash_reason'] == "Crashed into fence"
 
 def test_partial_cut():
+    """Test path where mower does not cut all grass"""
     # 2x2 grid, skip one cell
     sim = LawnMowerSimulator(width=2, height=2, rocks=[])
     path = ["right", "down"]
@@ -41,6 +49,7 @@ def test_partial_cut():
     assert result['crash_reason'] is None
 
 def test_invalid_direction():
+    """Test path with invalid direction that does not crash"""
     # 2x2 grid, invalid direction
     sim = LawnMowerSimulator(width=2, height=2, rocks=[])
     path = ["right", "diagonal", "down"]

@@ -1,3 +1,7 @@
+"""
+Simulator.py Simulates a robotic lawnmower navigating a grid, cutting grass, 
+and handling obstacles.
+"""
 from typing import List, Tuple, Dict
 
 # Define grid cell types
@@ -14,6 +18,16 @@ DIRECTIONS = {
 }
 
 class LawnMowerSimulator:
+    """
+    Class LawnMowerSimulator defines the following fields:
+    - width: Width of the lawn grid
+    - height: Height of the lawn grid
+    - rocks: List of tuples representing rock positions
+    - grid: Dictionary representing the lawn grid with cell states
+    - position: Current position of the mower
+    - crashed: Boolean indicating if the mower has crashed
+    - crash_reason: Reason for the crash if it occurs
+    """
     def __init__(self, width: int, height: int, rocks: List[Tuple[int, int]]):
         self.width = width
         self.height = height
@@ -63,8 +77,8 @@ class LawnMowerSimulator:
         self.position = new_pos
         self._cut_grass(new_pos)
 
-    #Simulate the path, cutting grass and checking for crashes returning the result
     def simulate(self, path: List[str]) -> Dict:
+        """Simulate the path, cutting grass and checking for crashes returning the result"""
         for step in path:
             self._move(step)
 
