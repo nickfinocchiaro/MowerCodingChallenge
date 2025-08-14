@@ -9,22 +9,18 @@ It uses pytest for testing and checks the expected outcomes of the GraphQL queri
 import pytest
 from lawnmower.graphql_schema import Query, SimulationResult
 
-@pytest.fixture
+@pytest.fixture(name="query")
 def query():
     """Fixture to create an instance of the Query class for testing"""
     return Query()
 
-# Test hello field
-
-def test_hello_returns_welcome(query):
+def test_hello_returns_welcome(query_fixture):
     """Test that the hello field returns the expected welcome message"""
-    assert query.hello() == "Welcome to the Robotic Lawnmower Simulator!"
+    assert query_fixture.hello() == "Welcome to the Robotic Lawnmower Simulator!"
 
-# Test simulate field with no rocks, all grass cut
-
-def test_simulate_all_grass_cut(query):
+def test_simulate_all_grass_cut(query_fixture):
     """Test simulate field with no rocks and all grass cut"""
-    result = query.simulate(
+    result = query_fixture.simulate(
         width=2,
         height=2,
         rocks=[],
@@ -36,11 +32,9 @@ def test_simulate_all_grass_cut(query):
     assert result.crashed is False
     assert result.crash_reason is None
 
-# Test simulate field with rocks, mower crashes
-
-def test_simulate_crash_on_rock(query):
+def test_simulate_crash_on_rock(query_fixture):
     """Test simulate field with mower crashing into a rock"""
-    result = query.simulate(
+    result = query_fixture.simulate(
         width=2,
         height=2,
         rocks=[[0,1]],
@@ -50,11 +44,9 @@ def test_simulate_crash_on_rock(query):
     assert result.crashed is True
     assert result.crash_reason == "Crashed into rock"
 
-# Test simulate field with mower crashing into fence
-
-def test_simulate_crash_on_fence(query):
+def test_simulate_crash_on_fence(query_fixture):
     """Test simulate field with mower crashing into a fence"""
-    result = query.simulate(
+    result = query_fixture.simulate(
         width=2,
         height=2,
         rocks=[],
@@ -64,11 +56,9 @@ def test_simulate_crash_on_fence(query):
     assert result.crashed is True
     assert result.crash_reason == "Crashed into fence"
 
-# Test simulate field with uncut grass remaining
-
-def test_simulate_uncut_grass_remaining(query):
+def test_simulate_uncut_grass_remaining(query_fixture):
     """Test simulate field with mower not cutting all grass"""
-    result = query.simulate(
+    result = query_fixture.simulate(
         width=2,
         height=2,
         rocks=[],
