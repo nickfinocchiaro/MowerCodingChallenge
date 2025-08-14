@@ -13,5 +13,5 @@ RUN pip install .
 # Expose port for uvicorn
 EXPOSE 8000
 
-# Command to run the app
+# start the FastAPI application using uvicorn
 CMD ["uvicorn", "src.main:lawnmower_app", "--host", "0.0.0.0", "--port", "8000"]
