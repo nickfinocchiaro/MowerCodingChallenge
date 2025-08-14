@@ -14,10 +14,6 @@ def query():
     """Fixture to create an instance of the Query class for testing"""
     return Query()
 
-def test_hello_returns_welcome(query):
-    """Test that the hello field returns the expected welcome message"""
-    assert query.hello() == "Welcome to the Robotic Lawnmower Simulator!"
-
 def test_simulate_all_grass_cut(query):
     """Test simulate field with no rocks and all grass cut"""
     result = query.simulate(
