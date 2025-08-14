@@ -15,19 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
       - name: Install dependencies
         run: pip install .[dev]
 
       - name: Lint with pylint
-        run: run pylint lawnmower tests
+        run: pylint lawnmower tests
 
       - name: Type check with mypy
-        run: run mypy lawnmower
+        run: mypy lawnmower
 
       - name: Run tests
-        run: run pytest --cov --cov-report=term-missing
+        run: pytest --cov --cov-report=term-missing
