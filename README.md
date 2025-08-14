@@ -6,12 +6,12 @@ This repo simulates a robotic lawnmower based on the specifications from the [Ro
 
 The goal of this project is to simulate a the mowing of a lawn, given the size of the gridded in width and height, a series of input directional steps for the mower, and locations of the rocks via a graphQL query. The resulting simulation will then respond to the query with retun information stating if all of the grass was cut, how many uncut squares in the grid remain, if the mower crashed while mowing, and what the mower crashed into (fence or rock).
 ## Setup
-Follow the steps below to run the microservice via Docker Compose:
+Follow the steps below to run the FastAPI microservice via Docker Compose:
 1. Clone the repo or download it as a zip:\
-`git clone https://github.com/nickfinocchiaro/LoftOrbital_MowerCodingChallenge.git`
+```git clone https://github.com/nickfinocchiaro/LoftOrbital_MowerCodingChallenge.git```
 
 2. Open a terminal and ensure that Docker-Compose is installed by running the following command:\
-`docker-compose --version`
+```docker-compose --version```
 
     If you need to install docker compose follow the below steps for your operating system:\
     **Ubuntu/Linux**\
@@ -27,4 +27,11 @@ Follow the steps below to run the microservice via Docker Compose:
 ```http://localhost:8000/graphql```
 
 ## Tests
-To run testsuite run `pytest --cov --cov-report=html` to show unit test coverage in an html format.
+Follow the steps below to run test suite locally in a python virtual environment:\
+1. At the top level of the repo, create Python Virtual enviornment:\
+```python -m venv .venv```
+2. Start the python virtual environment:\
+`.venv\Scripts\activate`
+3. At the top level, run the following command to run the test suite:\ 
+`pytest --cov --cov-report=html` 
+4. To view unit test coverage report navigate to the `coverage` directory and open `class_index.html` in a web browser
