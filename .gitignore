@@ -10,3 +10,5 @@ __pycache__/
 
 #ignoring package artifact
 *.egg-info/
+#ignoring mypy cache
+.mypy_cache/

@@ -2,7 +2,7 @@
 Simulator.py Simulates a robotic lawnmower navigating a grid, cutting grass, 
 and handling obstacles.
 """
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
 
 # Define grid cell types
 UNCUT = "uncut"
@@ -28,6 +28,8 @@ class LawnMowerSimulator:
     - crashed: Boolean indicating if the mower has crashed
     - crash_reason: Reason for the crash if it occurs
     """
+    crash_reason: 'Optional[str]'
+
     def __init__(self, width: int, height: int, rocks: List[Tuple[int, int]]):
         self.width = width
         self.height = height

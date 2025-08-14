@@ -49,8 +49,8 @@ class Query:
             - crashed: True if the mower crashed, False otherwise.
             - crash_reason: Reason for the crash if it occurred, None otherwise.
         """
-        # Convert to list of tuples LawnMowerSimulator expects tuples for dictionary keys
-        rocks_tuples = [tuple(rock) for rock in rocks]
+        # Convert to list of tuples LawnMowerSimulator expects tuples of (int, int)
+        rocks_tuples = [(int(rock[0]), int(rock[1])) for rock in rocks if len(rock) == 2 and all(isinstance(x, int) for x in rock[:2])]
         sim = LawnMowerSimulator(width=width, height=height, rocks=rocks_tuples)
         result = sim.simulate(path)
         return SimulationResult(**result)
