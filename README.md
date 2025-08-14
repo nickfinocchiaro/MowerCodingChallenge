@@ -92,7 +92,20 @@ The resulting response for this query will look like this:
 }
 ```
 
-As an alternative, you may want to use [Postman](https://www.postman.com/) for easily creating, duplicating, and tracking requests. I tested this both using `Postman` and `GraphiQL` and preferred `Postman` for this process due to it's more intuitive UI and easy way to create a collection of requests. 
+As an alternative, you may want to use [Postman](https://www.postman.com/) for easily creating, duplicating, and tracking requests. I tested this both using `Postman` and `GraphiQL` and preferred `Postman` for this process due to it's more intuitive UI and easy way to create a collection of requests.
+
+## Using client.py Test Client
+`client.py` is a test client that allows for a single `GraphQL` query to be run that is determined by the user. Due to the nature of the `GraphQL` query formatting your milage may vary depending if you are making the query via Windows CMD line or Ubuntu/Linux. Below are examples of the query formatting for both operating systems:
+
+**Ubuntu/Linux**
+```bash
+python client.py 'query { simulate(width: 3, height: 3, rocks: [[1,1]], path: ["right", "right", "down", "left", "left", "up"]) { allGrassCut uncutGrassRemaining crashed crashReason } }'
+```
+
+***Windows CMD***
+```cmd
+python client.py "query { simulate(width: 3, height: 3, rocks: [[1,1]], path: [\"right\", \"right\", \"down\", \"left\", \"left\", \"up\"]) { allGrassCut uncutGrassRemaining crashed crashReason } }"
+```
 
 ## Development Setup
 I have integrated CI via GitHub actions for this project and you can see the results on the `Actions` tab of the repo which runs pylint, mypy and runs the unit test suite.
