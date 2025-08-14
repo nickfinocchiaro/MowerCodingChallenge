@@ -1,5 +1,5 @@
 # LoftOrbital_MowerCodingChallenge
-Coding Challenge for loft orbital Sr. Software Position
+Coding Challenge for Loft Orbital Sr. Software Position
 
 ## Introduction
 This repo simulates a robotic lawnmower based on the specifications from the [Robotic Lawnmower Homework Question](https://loftorbital.atlassian.net/wiki/external/MWVmZDQyYjUxMWIwNGZhZWI1YjRjNjkyYTkyZTNlNGU#%E2%9C%85-Evaluation-Criteria)
@@ -7,9 +7,11 @@ This repo simulates a robotic lawnmower based on the specifications from the [Ro
 The goal of this project is to simulate a the mowing of a lawn, given the size of the gridded in width and height, a series of input directional steps for the mower, and locations of the rocks via a graphQL query. The resulting simulation will then respond to the query with retun information stating if all of the grass was cut, how many uncut squares in the grid remain, if the mower crashed while mowing, and what the mower crashed into (fence or rock).
 
 ## Design
-The robitic lawnmower sim is a python based microservice that uses `FastAPI` to handle server logic, `Strawberry` to define `GraphQL` schemas that integrate with `FastAPI`, and `uvicorn` which is an ASGI web server that handles web connections from an api client or browser which in turn, allows `FastAPI` to serve the request. 
+The robitic lawnmower sim is a Python module based microservice that uses `FastAPI` to handle server logic, `Strawberry` to define `GraphQL` schemas that integrate with `FastAPI`, and `uvicorn` which is an ASGI web server that handles web connections from an api client or browser which in turn, allows `FastAPI` to serve the request. 
 
-The microservice is contained within a docker container and uses `Docker-Compose` to simplify building and running for the user. 
+The microservice is contained within a docker container using the python 3.13-alpine image because of it is ultra lightweight, allowing for quicker builds, faster pulls, and less disk usage.
+
+I then opted to use `Docker-Compose` to simplify building and running for the user requiring only one command to build and run the microservice. 
 ## Setup
 Follow the steps below to run the FastAPI microservice via Docker Compose:
 1. Clone the repo or download it as a zip:
@@ -33,7 +35,7 @@ Go to the [Docker Website](https://docs.docker.com/desktop/setup/install/windows
 
 3. Once cloned, in the top level of the repo run the following docker-compose command via the command line to build and run the docker container:
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 4. Verify the microservice is running. Open a web browser and navigate to the address below:
@@ -41,6 +43,37 @@ docker-compose up --build
 http://localhost:8000/graphql
 ```
 ## Interacting with the API
+Continuing from the setup steps, as a result of step 4, you will see a graphQL interface in the web browser. 
+
+On the left hand side of the screen navigate select `Expand GraphiQL Explorer` to show the GraphQL query explorer. This is where the GraphQL UI will show you what types of queries are available to you for this application.
+
+Here is an example query that can be pasted into the interface:
+```GraphQL
+query Simulate {
+    simulate(width: 3, height: 3, rocks: [[1,1]], path: ["right","right","down","left","left","up"]) {
+        allGrassCut
+        uncutGrassRemaining
+        crashed
+        crashReason
+    }
+}
+```
+
+The resulting response for this query will look like this:
+```GraphQL
+{
+    "data": {
+        "simulate": {
+            "allGrassCut": false,
+            "uncutGrassRemaining": 4,
+            "crashed": true,
+            "crashReason": "Crashed into rock"
+        }
+    }
+}
+```
+
+As an alternative, you may want to use [Postman](https://www.postman.com/) for easily creating, duplicating, and tracking requests. I tested this both using `Postman` and `GraphiQL` and preferred `Postman` for this process due to it's more intuitive UI and easy way to create a collection of requests. 
 
 ## Tests
 Follow the steps below to run test suite locally in a python virtual environment:
