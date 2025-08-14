@@ -23,12 +23,16 @@ class LawnMowerSimulator:
         self.crash_reason = None
         self._cut_grass(self.position)
 
+    # Initialize the grid with uncut grass and place rocks
+    # Rocks are represented as tuples of (row, column)
     def _initialize_grid(self, rocks: List[Tuple[int, int]]) -> Dict[Tuple[int, int], str]:
         grid = {(r, c): UNCUT for r in range(self.height) for c in range(self.width)}
         for rock in rocks:
             grid[rock] = ROCK
         return grid
 
+    # Cut grass at the current position
+    # If the grass is already cut, it remains cut
     def _cut_grass(self, pos: Tuple[int, int]):
         if self.grid.get(pos) == UNCUT:
             self.grid[pos] = CUT
@@ -44,7 +48,7 @@ class LawnMowerSimulator:
         delta = DIRECTIONS[direction]
         new_pos = (self.position[0] + delta[0], self.position[1] + delta[1])
 
-        # Check bounds
+        # Check boundary of grid
         if not (0 <= new_pos[0] < self.height and 0 <= new_pos[1] < self.width):
             self.crashed = True
             self.crash_reason = "Crashed into fence"
@@ -59,6 +63,7 @@ class LawnMowerSimulator:
         self.position = new_pos
         self._cut_grass(new_pos)
 
+    #Simulate the path, cutting grass and checking for crashes returning the result
     def simulate(self, path: List[str]) -> Dict:
         for step in path:
             self._move(step)

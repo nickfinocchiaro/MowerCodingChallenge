@@ -6,5 +6,5 @@ import strawberry
 schema = strawberry.Schema(query=Query)
 lawnmower_graphql_app = GraphQLRouter(schema)
 
-app = FastAPI(title="Robomower GraphQL Simulator")
-app.include_router(lawnmower_graphql_app, prefix="/graphql")
+lawnmower_app = FastAPI(title="Robomower GraphQL Simulator")
+lawnmower_app.include_router(lawnmower_graphql_app, prefix="/graphql")

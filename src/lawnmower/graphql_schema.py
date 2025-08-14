@@ -16,9 +16,14 @@ class Query:
         self,
         width: int,
         height: int,
-        rocks: List[Tuple[int, int]],
+        rocks: List[List[int]],  # Accept as list of lists from GraphQL query
         path: List[str]
     ) -> SimulationResult:
-        sim = LawnMowerSimulator(width=width, height=height, rocks=rocks)
+        rocks_tuples = [tuple(rock) for rock in rocks]  # Convert to list of tuples because LawnMowerSimulator expects tuples for dictionary keys
+        sim = LawnMowerSimulator(width=width, height=height, rocks=rocks_tuples)
         result = sim.simulate(path)
         return SimulationResult(**result)
+
+    @strawberry.field
+    def hello(self) -> str:
+        return "Welcome to the Robotic Lawnmower Simulator!"
