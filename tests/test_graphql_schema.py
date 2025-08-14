@@ -14,13 +14,13 @@ def query():
     """Fixture to create an instance of the Query class for testing"""
     return Query()
 
-def test_hello_returns_welcome(query_fixture):
+def test_hello_returns_welcome(query):
     """Test that the hello field returns the expected welcome message"""
-    assert query_fixture.hello() == "Welcome to the Robotic Lawnmower Simulator!"
+    assert query.hello() == "Welcome to the Robotic Lawnmower Simulator!"
 
-def test_simulate_all_grass_cut(query_fixture):
+def test_simulate_all_grass_cut(query):
     """Test simulate field with no rocks and all grass cut"""
-    result = query_fixture.simulate(
+    result = query.simulate(
         width=2,
         height=2,
         rocks=[],
@@ -32,9 +32,9 @@ def test_simulate_all_grass_cut(query_fixture):
     assert result.crashed is False
     assert result.crash_reason is None
 
-def test_simulate_crash_on_rock(query_fixture):
+def test_simulate_crash_on_rock(query):
     """Test simulate field with mower crashing into a rock"""
-    result = query_fixture.simulate(
+    result = query.simulate(
         width=2,
         height=2,
         rocks=[[0,1]],
@@ -44,9 +44,9 @@ def test_simulate_crash_on_rock(query_fixture):
     assert result.crashed is True
     assert result.crash_reason == "Crashed into rock"
 
-def test_simulate_crash_on_fence(query_fixture):
+def test_simulate_crash_on_fence(query):
     """Test simulate field with mower crashing into a fence"""
-    result = query_fixture.simulate(
+    result = query.simulate(
         width=2,
         height=2,
         rocks=[],
@@ -56,9 +56,9 @@ def test_simulate_crash_on_fence(query_fixture):
     assert result.crashed is True
     assert result.crash_reason == "Crashed into fence"
 
-def test_simulate_uncut_grass_remaining(query_fixture):
+def test_simulate_uncut_grass_remaining(query):
     """Test simulate field with mower not cutting all grass"""
-    result = query_fixture.simulate(
+    result = query.simulate(
         width=2,
         height=2,
         rocks=[],
