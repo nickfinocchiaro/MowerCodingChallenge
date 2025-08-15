@@ -97,16 +97,33 @@ The resulting response for this query will look like this:
 As an alternative, you may want to use [Postman](https://www.postman.com/) for easily creating, duplicating, and tracking requests. I tested this both using `Postman` and `GraphiQL` and preferred `Postman` for this process due to it's more intuitive UI and easy way to create a collection of requests.
 
 ## Using client.py Test Client
-`client.py` is a test client that allows for a single `GraphQL` query to be run that is determined by the user. Due to the nature of the `GraphQL` query formatting your milage may vary depending if you are making the query via Windows CMD line or Ubuntu/Linux. Below are examples of the query formatting for both operating systems:
-
-**Ubuntu/Linux**
+`client.py` is a test client script that allows for a single `GraphQL` query to be run that is determined by the user. To edit the inputs, simply open the file `client.py` edit the fields at the top of the file for any desired input. 
+I have provided an example of the user editable fields below for reference:
+```python
+API_URL = "http://localhost:8000/graphql"
+WIDTH = 3
+HEIGHT = 3
+ROCKS = [[1, 1]]
+PATH = ["right", "right", "down", "left", "left", "up"]
+FIELDS = ["allGrassCut", "uncutGrassRemaining", "crashed", "crashReason"]
+```
+To run the client, save your changes and then run the command:
 ```bash
-python client.py 'query { simulate(width: 3, height: 3, rocks: [[1,1]], path: ["right", "right", "down", "left", "left", "up"]) { allGrassCut uncutGrassRemaining crashed crashReason } }'
+python client.py
 ```
 
-***Windows CMD***
-```cmd
-python client.py "query { simulate(width: 3, height: 3, rocks: [[1,1]], path: [\"right\", \"right\", \"down\", \"left\", \"left\", \"up\"]) { allGrassCut uncutGrassRemaining crashed crashReason } }"
+The resulting Json output will be shown in the terminal such as this example below:
+```Json
+{
+  "data": {
+    "simulate": {
+      "allGrassCut": false,
+      "uncutGrassRemaining": 4,
+      "crashed": true,
+      "crashReason": "Crashed into rock"
+    }
+  }
+}
 ```
 
 ## Development Setup
