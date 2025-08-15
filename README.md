@@ -13,7 +13,9 @@ The microservice is contained within a docker container using the python 3.13-al
 
 I then opted to use `Docker-Compose` to simplify building and running for the user requiring only one command to build and run the microservice. 
 
-Furthermore, I added Kubernetes manifest to make it deployable to a Kubernetes cluster. 
+Furthermore, I added Kubernetes manifest to make it deployable to a Kubernetes cluster.
+
+Lastly, I integrated GitHub Actions CI with this project to do automated code linting with pylint, type checking with mypy, and run the unit test suite with pytest. Further integrations with the CI platform could include building and publishing the Docker containe, creating the Kubernetes cluster, and applying the k8s manifest to the cluster. 
 ## Setup
 ### Docker Compose
 Follow the steps below to run the FastAPI microservice via Docker Compose:
@@ -47,7 +49,7 @@ http://localhost:8000/graphql
 ### Kuberenetes
 Prerequesites for running this applicaiton in a Kubernetes cluster would be to have either `Minikube` or `Kind` installed for running a Kubernetes cluster on your local system. 
 
-With the local cluster running follow the steps below:\
+With the local cluster running follow the steps below:
 1. Apply the Kubernetes manifest:
 ```yml
 kubectl apply -f k8s-deployment.yaml
@@ -108,7 +110,7 @@ python client.py "query { simulate(width: 3, height: 3, rocks: [[1,1]], path: [\
 ```
 
 ## Development Setup
-I have integrated CI via GitHub actions for this project and you can see the results on the `Actions` tab of the repo which runs pylint, mypy and runs the unit test suite.
+I have integrated CI via GitHub actions for this project and you can see the results on the `Actions` tab of the repo which runs pylint, mypy, and the pytest suite.
 
 Follow the steps below to run test suite locally in a python virtual environment:
 1. At the top level of the repo, create Python Virtual enviornment:
