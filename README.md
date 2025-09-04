@@ -1,9 +1,7 @@
-# Loft Orbital Mower Simulation Coding Challenge
-Coding Challenge for Loft Orbital Sr. Software Position
+# Mower Simulation Coding Challenge
+Robomower coding simulator challenge problem
 
 ## Introduction
-This repo simulates a robotic lawnmower based on the specifications from the [Robotic Lawnmower Homework Question](https://loftorbital.atlassian.net/wiki/external/MWVmZDQyYjUxMWIwNGZhZWI1YjRjNjkyYTkyZTNlNGU#%E2%9C%85-Evaluation-Criteria)
-
 The goal of this project is to simulate a the mowing of a lawn, given the size of the gridded in width and height, a series of input directional steps for the mower, and locations of the rocks via a graphQL query. The resulting simulation will then respond to the query with retun information stating if all of the grass was cut, how many uncut squares in the grid remain, if the mower crashed while mowing, and what the mower crashed into (fence or rock).
 
 ## Design
